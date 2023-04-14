@@ -4,10 +4,43 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=\, initial-scale=1.0" />
+    <script src="Http_services.js"></script>
     <title>Ajax demo</title>
   </head>
   <body>
-    <h2>AJAX Demo</h2>
+    <h1>Test Services HTML</h1>
+    <div id="get_services"></div>
+    <div id="delete_services"></div>
+    <div id="post_services"></div>
+    <script>
+      const getElem = document.querySelector('#get_services');
+      const getURL = 'http://localhost:3000/employees/1';
+      makePromiseCall('GET', getURL, true)
+        .then((responseText) => {
+          getElem.textContent = responseText;
+        })
+        .catch((error) => (getElem.textContent = JSON.stringify(error)));
+
+      // const getElem2 = document.querySelector('#delete_services');
+      // const delURL = 'http://localhost:3000/employees/5';
+      // makePromiseCall('DELETE', delURL, false)
+      //   .then((responseText) => {
+      //     getElem2.textContent = responseText;
+      //   })
+      //   .catch((error) => {
+      //     getElem2.textContent = JSON.stringify(error);
+      //   });
+
+      const getElem3 = document.querySelector('#post_services');
+      const postURL = 'http://localhost:3000/employees';
+      const newDetail = { name: 'Lily', salary: '7000' };
+      makePromiseCall('POST', postURL, true, newDetail)
+        .then((responseText) => {
+          getElem3.textContent = responseText;
+        })
+        .catch((error) => {
+          getElem3.textContent = JSON.stringify(error);
+        });
+    </script>
   </body>
-  <script src="Timer.js"></script>
 </html>
